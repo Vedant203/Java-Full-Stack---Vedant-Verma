@@ -3,6 +3,7 @@ package com.main;
 import java.io.File;
 import java.util.Scanner;
 
+import com.service.CreateFile;
 import com.service.DisplayFiles;
 
 
@@ -11,6 +12,7 @@ public class LockedMeApp {
 	private static Scanner scanner = new Scanner(System.in);
 	private static final String DIRECTORY_PATH = "LockedMeApp";
 	private static final DisplayFiles displayFiles = new DisplayFiles();
+	private static final CreateFile createFile = new CreateFile();
 	
 	public static void main(String[] args) {
 		
@@ -19,7 +21,7 @@ public class LockedMeApp {
 		
 		
 		displayFiles.setDirectoryPath(DIRECTORY_PATH);
-		
+		createFile.setDirectoryPath(DIRECTORY_PATH);
 //		if(directoryCreated)
 //			System.out.println("New directory created");
 //		else
@@ -30,11 +32,13 @@ public class LockedMeApp {
 		System.out.println("Organization: Company Lockers Pvt. Ltd. ");
 		
 		while(true) {
-			
-			System.out.println("Choose one of the following options as required: ");
+			System.out.println();
+			System.out.println("Choose the operation you want to perform:");
 			System.out.println("1. Display all files in an ascending order.");
 			System.out.println("2. Add/Search/Delete a file.");
 			System.out.println("3. Exit the application.");
+			System.out.println("Enter your choice: ");
+			
 			
 			int choice = scanner.nextInt();
 			
@@ -42,45 +46,49 @@ public class LockedMeApp {
 			
 			case 1: displayFiles.displayFilesInAscendingOrder();
 				break;
-			case 2: while(true) {
-				System.out.println("CRUD operations menu:");
-				System.out.println("1. Add a file");
-				System.out.println("2. Delete a file");
-				System.out.println("3. Search a file");
-				System.out.println("4. Go back to main menu");
-				System.out.println("Enter your choice: ");
-
-				int choice1 = scanner.nextInt();
-				
-				switch(choice1) {
-					case 1: 
-						System.out.println("Enter the name of the file to add:");
-						String addFileName = scanner.next();
-						// Code to add file
-						System.out.println("File " + addFileName + " added successfully.");
-						break;
-					case 2: 
-						System.out.println("Enter the name of the file to delete:");
-						String deleteFileName = scanner.next();
-						// Code to delete file
-						System.out.println("File " + deleteFileName + " deleted successfully.");
-						break;
-					case 3: 
-						System.out.println("Enter the name of the file to search:");
-						String searchFileName = scanner.next();
-						// Code to search file
-						System.out.println("File " + searchFileName + " found.");
-						break;
-					case 4: 
-						break; // Go back to main menu
-					default: 
-						System.out.println("Invalid choice. Please try again.\n");
-				}
-			}
+			case 2: crudOperationsOptions();
+				break;
 			case 3: System.out.println("Exited the application.");
-					return;
+				return;
 			default: System.out.println("Enter a valid choice...\n");
 			
+			}
+		}
+	}
+	public static void crudOperationsOptions() {
+		while(true) {
+			System.out.println();
+			System.out.println("CRUD operations menu:");
+			System.out.println("1. Add a file");
+			System.out.println("2. Delete a file");
+			System.out.println("3. Search a file");
+			System.out.println("4. Go back to main menu");
+			System.out.println("Enter your choice: ");
+
+			int choice1 = scanner.nextInt();
+			
+			switch(choice1) {
+				case 1: 
+					System.out.println("Enter the name of the file to add:");
+					String addFileName = scanner.next();
+					createFile.addFile(addFileName);
+					break;
+				case 2: 
+					System.out.println("Enter the name of the file to delete:");
+					String deleteFileName = scanner.next();
+					// Code to delete file
+					System.out.println("File " + deleteFileName + " deleted successfully.");
+					break;
+				case 3: 
+					System.out.println("Enter the name of the file to search:");
+					String searchFileName = scanner.next();
+					// Code to search file
+					System.out.println("File " + searchFileName + " found.");
+					break;
+				case 4: 
+					return; // Go back to main menu
+				default: 
+					System.out.println("Invalid choice. Please try again.\n");
 			}
 		}
 	}
