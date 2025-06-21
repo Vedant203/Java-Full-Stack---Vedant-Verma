@@ -89,7 +89,7 @@ public class LockedMeApp {
 			}
 			switch(choice1) {
 				case 1: 
-					System.out.println("Enter the name of the file to add:");
+					System.out.println("Enter the name of the file to add (without spaces):");
 					String addFileName = scanner.next();
 					createFile.addFile(addFileName);
 					break;
