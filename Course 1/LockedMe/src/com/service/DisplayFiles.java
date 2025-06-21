@@ -1,5 +1,8 @@
 package com.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.io.File;
 
 public class DisplayFiles{
@@ -20,13 +23,17 @@ public class DisplayFiles{
 	public void displayFilesInAscendingOrder() {
 		
 		File directory = new File(directoryPath);
-		String[] files = directory.list();
+		File[] files = directory.listFiles();
 		if(files == null || files.length == 0) {
 			System.out.println("No files found in the directory: " + directoryPath + "\n");
 			return;
 		} else {
+			List<String> fileList = new ArrayList<>();
+			for (File file:files) 
+				fileList.add(file.getName());
+			Collections.sort(fileList);
 			System.out.println("Files in directory " + directoryPath + ":");
-			for (String file : files) {
+			for (String file : fileList) {
 				System.out.println(file);
 			}
 		}
