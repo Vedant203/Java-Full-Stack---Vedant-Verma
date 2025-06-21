@@ -3,15 +3,22 @@ package com.main;
 import java.io.File;
 import java.util.Scanner;
 
+import com.service.DisplayFiles;
+
 
 public class LockedMeApp {
 
 	private static Scanner scanner = new Scanner(System.in);
+	private static final String DIRECTORY_PATH = "LockedMeApp";
+	private static final DisplayFiles displayFiles = new DisplayFiles();
 	
 	public static void main(String[] args) {
-
-		File directory = new File("LockedMeApp");
+		
+		File directory = new File(DIRECTORY_PATH);
 		boolean directoryCreated = directory.mkdirs();
+		
+		
+		displayFiles.setDirectoryPath(DIRECTORY_PATH);
 		
 //		if(directoryCreated)
 //			System.out.println("New directory created");
@@ -24,7 +31,6 @@ public class LockedMeApp {
 		
 		while(true) {
 			
-			
 			System.out.println("Choose one of the following options as required: ");
 			System.out.println("1. Display all files in an ascending order.");
 			System.out.println("2. Add/Search/Delete a file.");
@@ -34,7 +40,8 @@ public class LockedMeApp {
 			
 			switch(choice) {
 			
-			case 1: break;
+			case 1: displayFiles.displayFilesInAscendingOrder();
+				break;
 			case 2: while(true) {
 				System.out.println("CRUD operations menu:");
 				System.out.println("1. Add a file");
