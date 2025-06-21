@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Scanner;
 
 import com.service.CreateFile;
+import com.service.DeleteFile;
 import com.service.DisplayFiles;
 
 
@@ -13,7 +14,7 @@ public class LockedMeApp {
 	private static final String DIRECTORY_PATH = "LockedMeApp";
 	private static final DisplayFiles displayFiles = new DisplayFiles();
 	private static final CreateFile createFile = new CreateFile();
-	
+	private static final DeleteFile deleteFile = new DeleteFile();
 	public static void main(String[] args) {
 		
 		File directory = new File(DIRECTORY_PATH);
@@ -22,6 +23,7 @@ public class LockedMeApp {
 		
 		displayFiles.setDirectoryPath(DIRECTORY_PATH);
 		createFile.setDirectoryPath(DIRECTORY_PATH);
+		deleteFile.setDirectoryPath(DIRECTORY_PATH);
 //		if(directoryCreated)
 //			System.out.println("New directory created");
 //		else
@@ -76,8 +78,7 @@ public class LockedMeApp {
 				case 2: 
 					System.out.println("Enter the name of the file to delete:");
 					String deleteFileName = scanner.next();
-					// Code to delete file
-					System.out.println("File " + deleteFileName + " deleted successfully.");
+					deleteFile.deleteFile(deleteFileName);
 					break;
 				case 3: 
 					System.out.println("Enter the name of the file to search:");
