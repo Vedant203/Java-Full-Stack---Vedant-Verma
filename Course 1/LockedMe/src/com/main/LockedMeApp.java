@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.service.CreateFile;
 import com.service.DeleteFile;
 import com.service.DisplayFiles;
+import com.service.SearchFile;
 
 
 public class LockedMeApp {
@@ -15,15 +16,17 @@ public class LockedMeApp {
 	private static final DisplayFiles displayFiles = new DisplayFiles();
 	private static final CreateFile createFile = new CreateFile();
 	private static final DeleteFile deleteFile = new DeleteFile();
+	private static final SearchFile searchFile = new SearchFile();
+	
 	public static void main(String[] args) {
 		
 		File directory = new File(DIRECTORY_PATH);
 		boolean directoryCreated = directory.mkdirs();
 		
-		
 		displayFiles.setDirectoryPath(DIRECTORY_PATH);
 		createFile.setDirectoryPath(DIRECTORY_PATH);
 		deleteFile.setDirectoryPath(DIRECTORY_PATH);
+		searchFile.setDirectoryPath(DIRECTORY_PATH);
 //		if(directoryCreated)
 //			System.out.println("New directory created");
 //		else
@@ -66,9 +69,14 @@ public class LockedMeApp {
 			System.out.println("3. Search a file");
 			System.out.println("4. Go back to main menu");
 			System.out.println("Enter your choice: ");
-
-			int choice1 = scanner.nextInt();
 			
+			int choice1;
+			try{choice1 = scanner.nextInt();}
+			catch(Exception e) {
+				System.out.println("Invalid input. Please enter a number.");
+				scanner.next(); // Clear the invalid input
+				continue; // Restart the loop
+			}
 			switch(choice1) {
 				case 1: 
 					System.out.println("Enter the name of the file to add:");
@@ -83,13 +91,12 @@ public class LockedMeApp {
 				case 3: 
 					System.out.println("Enter the name of the file to search:");
 					String searchFileName = scanner.next();
-					// Code to search file
-					System.out.println("File " + searchFileName + " found.");
+					searchFile.searchFile(searchFileName);
 					break;
 				case 4: 
-					return; // Go back to main menu
+					return;
 				default: 
-					System.out.println("Invalid choice. Please try again.\n");
+					System.out.println("Invalid choice. Please try again...\n");
 			}
 		}
 	}
