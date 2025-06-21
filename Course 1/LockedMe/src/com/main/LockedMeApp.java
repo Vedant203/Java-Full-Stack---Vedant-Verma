@@ -21,16 +21,17 @@ public class LockedMeApp {
 	public static void main(String[] args) {
 		
 		File directory = new File(DIRECTORY_PATH);
+		
 		boolean directoryCreated = directory.mkdirs();
+//		if(directoryCreated)
+//		System.out.println("New directory created");
+//	else
+//		System.out.println("Directory already exists. Using existing directory");
 		
 		displayFiles.setDirectoryPath(DIRECTORY_PATH);
 		createFile.setDirectoryPath(DIRECTORY_PATH);
 		deleteFile.setDirectoryPath(DIRECTORY_PATH);
 		searchFile.setDirectoryPath(DIRECTORY_PATH);
-//		if(directoryCreated)
-//			System.out.println("New directory created");
-//		else
-//			System.out.println("Directory already exists. Using existing directory");
 
 		System.out.println("App Name: LockedMe");
 		System.out.println("Developed by: Vedant Verma");
@@ -44,8 +45,14 @@ public class LockedMeApp {
 			System.out.println("3. Exit the application.");
 			System.out.println("Enter your choice: ");
 			
-			
-			int choice = scanner.nextInt();
+			int choice;
+			try {
+				choice = scanner.nextInt();
+			} catch (Exception e) {
+				System.out.println("Invalid input. Please enter a number.");
+				scanner.next();
+				continue;
+			}
 			
 			switch(choice) {
 			
@@ -74,8 +81,8 @@ public class LockedMeApp {
 			try{choice1 = scanner.nextInt();}
 			catch(Exception e) {
 				System.out.println("Invalid input. Please enter a number.");
-				scanner.next(); // Clear the invalid input
-				continue; // Restart the loop
+				scanner.next();
+				continue;
 			}
 			switch(choice1) {
 				case 1: 
