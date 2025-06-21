@@ -33,9 +33,12 @@ public class LockedMeApp {
 		deleteFile.setDirectoryPath(DIRECTORY_PATH);
 		searchFile.setDirectoryPath(DIRECTORY_PATH);
 
+		System.out.println("-----------------------------------------");
 		System.out.println("App Name: LockedMe");
 		System.out.println("Developed by: Vedant Verma");
 		System.out.println("Organization: Company Lockers Pvt. Ltd. ");
+		System.out.println("-----------------------------------------");
+		System.out.println("Welcome to LockedMe.com Application!");
 		
 		while(true) {
 			System.out.println();
