@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Customer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7f9fc;
+      padding: 30px;
+    }
+
+    h3, h4 {
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    select, input[type="submit"], input[type="reset"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+
+    .red { color: red; }
+
+    .result {
+      margin-top: 30px;
+      background-color: #eef5ff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <p th:if="${result}" th:text="${result}" class="red"></p>
+
+  <h3>Search a Customer</h3>
+
+  <form th:action="@{/customer/searchCustomerByEmailId}" method="get">
+    <label>Select Customer Email:</label>
+    <select name="customerId" required>
+      <option value="" disabled selected>Select a customer</option>
+      <option th:each="cust : ${customers}"
+              th:value="${cust.customerId}"
+              th:text="${cust.customerName + ' (' + cust.customerId + ')'}">
+      </option>
+    </select><br/>
+
+    <input type="submit" value="Search" />
+    <input type="reset" value="Reset" />
+  </form>
+
+  <div class="result" th:if="${customer}">
+    <h4>Customer Details</h4>
+    <ul>
+      <li><strong>Email ID:</strong> <span th:text="${customer.customerId}"></span></li>
+      <li><strong>Name:</strong> <span th:text="${customer.customerName}"></span></li>
+      <li><strong>Password:</strong> <span th:text="${customer.customerPassword}"></span></li>
+      <li><strong>Orders:</strong>
+        <ul>
+          <li th:each="order : ${customer.orders}" th:text="'Order ID: ' + ${order.orderId} + ', Qty: ' + ${order.quantitys}">No Orders</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <a href="javascript:history.back()">← Back</a>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <title>Orders</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fafb;
+      margin: 30px;
+    }
+
+    h3 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #e9f5ff;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<h3>View All Orders Placed</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Product ID</th>
+      <th>Product Name</th>
+      <th>Product Price</th>
+      <th>Product Category</th>
+      <th>Quantity</th>
+      <th>Order Date</th>
+      <th>Order Time</th>
+      <th>Customer Email</th>
+      <th>Customer Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="order : ${orders}">
+      <td th:text="${order.orderId}"></td>
+      <td th:text="${order.productId.productId}"></td>
+      <td th:text="${order.productId.productName}"></td>
+      <td th:text="${order.productId.productPrice}"></td>
+      <td th:text="${order.productId.productCategory}"></td>
+      <td th:text="${order.quantitys}"></td>
+      <td th:text="${order.orderDate}"></td>
+      <td th:text="${order.orderTime}"></td>
+      <td th:text="${order.customer.customerId}"></td>
+      <td th:text="${order.customer.customerName}"></td>
+    </tr>
+  </tbody>
+</table>
+
+<a href="javascript:history.back()">← Back</a>
+
+</body>
+</html>

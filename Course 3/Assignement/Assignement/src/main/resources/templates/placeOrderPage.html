@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Place Order</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      padding: 30px;
+    }
+
+    h3 {
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select {
+      padding: 8px;
+      margin-top: 5px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"], input[type="reset"] {
+      width: auto;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    p {
+      font-weight: bold;
+    }
+
+    .green { color: green; }
+    .red { color: red; }
+
+    .summary {
+      margin-top: 30px;
+      background-color: #e8f5e9;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <p th:if="${message}" th:text="${message}" class="red"></p>
+  <p th:if="${result}" th:text="${result}" class="green"></p>
+
+  <h3>Place a New Order</h3>
+
+  <form th:action="@{/orders/placeOrder}" method="post">
+    <label>Product:</label>
+    <select name="productId" required>
+      <option value="" disabled selected>Select a product</option>
+      <option th:each="prod : ${products}"
+              th:value="${prod.productId}"
+              th:text="${prod.productName + ' (₹' + prod.productPrice + ')'}">
+      </option>
+    </select>
+
+    <label>Quantity:</label>
+    <input type="number" name="quantity" min="1" required />
+
+    <input type="submit" value="Place Order" />
+    <input type="reset" value="Reset" />
+  </form>
+
+  <div class="summary" th:if="${order}">
+    <h4>Order Summary</h4>
+    <p><strong>Customer:</strong> <span th:text="${order.customer.customerName}"></span></p>
+    <p><strong>Date:</strong> <span th:text="${order.orderDate}"></span></p>
+    <p><strong>Time:</strong> <span th:text="${order.orderTime}"></span></p>
+    <p><strong>Product:</strong> <span th:text="${order.productId.productName}"></span></p>
+    <p><strong>Quantity:</strong> <span th:text="${order.quantitys}"></span></p>
+  </div>
+
+  <a href="javascript:history.back()">← Back</a>
+
+</body>
+</html>

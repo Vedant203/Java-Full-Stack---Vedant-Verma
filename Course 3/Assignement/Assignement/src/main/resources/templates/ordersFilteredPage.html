@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <title>Orders by Date</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      padding: 30px;
+    }
+
+    h3 {
+      color: #333;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    input[type="date"], input[type="submit"] {
+      padding: 8px;
+      margin: 10px 10px 10px 0;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #e9f5ff;
+    }
+
+    p {
+      font-weight: bold;
+      color: blue;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<h3>View Orders Filtered by Date</h3>
+
+<form th:action="@{/orders/displayOrdersByDatePage}" method="get">
+  <label>Start Date:</label>
+  <input type="date" name="startDate" required/>
+  <label>End Date:</label>
+  <input type="date" name="endDate" required/>
+  <input type="submit" value="Search"/>
+</form>
+
+<p th:if="${result}" th:text="${result}"></p>
+
+<table th:if="${orders != null and !#lists.isEmpty(orders)}">
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Product ID</th>
+      <th>Order Date</th>
+      <th>Order Time</th>
+      <th>Quantity</th>
+      <th>Customer Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="order : ${orders}">
+      <td th:text="${order.orderId}"></td>
+      <td th:text="${order.productId.productId}"></td>
+      <td th:text="${order.orderDate}"></td>
+      <td th:text="${order.orderTime}"></td>
+      <td th:text="${order.quantitys}"></td>
+      <td th:text="${order.customer.customerId}"></td>
+    </tr>
+  </tbody>
+</table>
+
+<p th:if="${orders != null and #lists.isEmpty(orders)}" style="color:red;">No orders found in the selected date range.</p>
+
+<a href="javascript:history.back()">← Back</a>
+
+</body>
+</html>

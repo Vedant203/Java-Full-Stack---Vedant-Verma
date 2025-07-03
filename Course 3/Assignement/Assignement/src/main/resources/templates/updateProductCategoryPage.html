@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Product Category</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      padding: 40px;
+    }
+
+    h3 {
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+
+    input[type="submit"], input[type="reset"] {
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    input[type="reset"] {
+      background-color: #6c757d;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    input[type="reset"]:hover {
+      background-color: #5a6268;
+    }
+
+    .result {
+      color: green;
+      margin-bottom: 20px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h3>Update Product Category</h3>
+
+  <p th:if="${result}" th:text="${result}" class="result"></p>
+
+  <form th:action="@{/product/updateProductCategory}" method="post">
+
+    <label>Select Product:</label>
+    <select name="productId" required>
+      <option value="" disabled selected>Select a product</option>
+      <option th:each="prod : ${products}"
+              th:value="${prod.productId}"
+              th:text="${prod.productName + ' (ID: ' + prod.productId + ')'}">
+      </option>
+    </select>
+
+    <label>New Category:</label>
+    <select name="newCategory" required>
+      <option value="" disabled selected>Select a category</option>
+      <option th:each="cat : ${categories}"
+              th:value="${cat.categoryName}"
+              th:text="${cat.categoryName}">
+      </option>
+    </select>
+
+    <input type="submit" value="Update Category" />
+    <input type="reset" value="Reset" />
+  </form>
+
+  <a href="javascript:history.back()">← Back</a>
+
+</body>
+</html>

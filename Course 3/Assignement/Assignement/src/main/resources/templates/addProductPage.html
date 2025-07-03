@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Product</title>
+  <style>
+    body {
+      background-color: #f2f4f8;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      width: 400px;
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"],
+    input[type="reset"] {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"] {
+      background-color: #28a745;
+      margin-right: 10px;
+    }
+
+    input[type="reset"] {
+      background-color: #dc3545;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #218838;
+    }
+
+    input[type="reset"]:hover {
+      background-color: #c82333;
+    }
+
+    .message {
+      color: red;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .info {
+      color: green;
+      text-align: center;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <span class="message" th:if="${msg}" th:text="${msg}"></span>
+    <h2 class="info" th:if="${info}" th:text="${info}"></h2>
+    <h3>Add Product</h3>
+
+    <form th:action="@{/product/addProduct}" method="post" th:object="${product}">
+      <label>Name</label>
+      <input type="text" th:field="*{productName}" required />
+
+      <label>Price</label>
+      <input type="number" th:field="*{productPrice}" step="0.01" required />
+
+      <label>Category</label>
+      <select th:field="*{productCategory.categoryName}" required>
+        <option value="" disabled selected>Select a category</option>
+        <option th:each="cat : ${categories}"
+                th:value="${cat.categoryName}"
+                th:text="${cat.categoryName}">
+        </option>
+      </select>
+
+      <input type="submit" value="Store Product" />
+      <input type="reset" value="Reset" />
+    </form>
+
+    <a href="javascript:history.back()" class="back-link">Back</a>
+  </div>
+
+</body>
+</html>

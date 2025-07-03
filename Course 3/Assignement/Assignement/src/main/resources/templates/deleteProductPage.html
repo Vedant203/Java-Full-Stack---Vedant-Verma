@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete Product</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      padding: 30px;
+    }
+
+    h3 {
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    select, input[type="submit"], input[type="reset"] {
+      padding: 8px;
+      margin: 10px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    input[type="reset"] {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .message {
+      color: red;
+      font-weight: bold;
+    }
+
+    .back-link {
+      margin-top: 20px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="message" th:if="${result}" th:text="${result}"></p>
+
+  <h3>Delete a Product</h3>
+
+  <form th:action="@{/product/deleteProduct}" method="post">
+    <label for="productId">Select Product:</label>
+    <select name="productId" id="productId" required>
+      <option value="" disabled selected>Select a product</option>
+      <option th:each="prod : ${products}"
+              th:value="${prod.productId}"
+              th:text="${prod.productName + ' (ID: ' + prod.productId + ')'}">
+      </option>
+    </select><br/>
+
+    <input type="submit" value="Delete Product" />
+    <input type="reset" value="Reset" />
+  </form>
+
+  <a class="back-link" href="javascript:history.back()">← Back</a>
+
+</body>
+</html>

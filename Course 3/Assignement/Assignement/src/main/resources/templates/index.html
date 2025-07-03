@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to Sporty Shoes!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    :root {
+      --primary-color: #007bff;
+      --primary-hover: #0056b3;
+      --success-color: #28a745;
+      --success-hover: #218838;
+      --dark-text: #343a40;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .header {
+      margin-bottom: 50px;
+    }
+    .header h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--dark-text);
+      margin: 0;
+    }
+    .header h1 em {
+      font-style: normal;
+      color: var(--primary-color);
+    }
+    .header p {
+      font-size: 1.2rem;
+      color: #6c757d;
+      margin-top: 10px;
+    }
+    .button-container {
+      display: flex;
+      gap: 20px;
+    }
+    .button-container a {
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .button-container a.primary {
+      background-color: var(--primary-color);
+    }
+    .button-container a.primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+    }
+    .button-container a.secondary {
+      background-color: var(--success-color);
+    }
+     .button-container a.secondary:hover {
+      background-color: var(--success-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+    }
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 2.5rem;
+      }
+      .button-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Welcome to <em>Sporty Shoes</em>!</h1>
+    <p>Your one-stop shop for the best athletic footwear.</p>
+  </div>
+
+  <div class="button-container">
+    <a href="login/customerLoginPage" class="primary">Customer Login</a>
+    <a href="login/adminLoginPage" class="primary">Admin Login</a>
+    <a href="login/customerSignIn" class="secondary">New Customer? Sign Up</a>
+  </div>
+
+</body>
+</html>

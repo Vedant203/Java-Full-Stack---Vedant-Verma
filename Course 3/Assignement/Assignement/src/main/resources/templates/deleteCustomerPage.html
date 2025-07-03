@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete Customer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f9f9f9;
+    }
+
+    h3 {
+      color: #333;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    select, input[type="submit"], input[type="reset"] {
+      padding: 8px;
+      margin: 8px 0;
+      width: 300px;
+    }
+
+    input[type="submit"] {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    input[type="reset"] {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 20px;
+    }
+
+    .message {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="message" th:if="${result}" th:text="${result}"></p>
+
+  <h3>Delete a Customer</h3>
+
+  <form th:action="@{/customer/deleteCustomer}" method="post">
+    <label for="customerId">Select Customer Email:</label><br/>
+    <select name="customerId" id="customerId" required>
+      <option value="" disabled selected>Select a customer</option>
+      <option th:each="cust : ${customers}"
+              th:value="${cust.customerId}"
+              th:text="${cust.customerName + ' (' + cust.customerId + ')'}">
+      </option>
+    </select><br/>
+
+    <input type="submit" value="Delete Customer" />
+    <input type="reset" value="Reset" />
+  </form>
+
+  <a class="back-link" href="javascript:history.back()">Back</a>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Sign-Up</title>
+  <style>
+    :root {
+      --primary-color: #007bff;
+      --success-color: #28a745;
+      --secondary-color: #6c757d;
+      --light-bg: #f8f9fa;
+      --dark-text: #343a40;
+      --border-color: #ced4da;
+    }
+    body {
+      font-family: 'Segoe UI', 'Roboto', sans-serif;
+      background-color: var(--light-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+      box-sizing: border-box;
+    }
+    h3 {
+      text-align: center;
+      color: var(--dark-text);
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+    .message, .info {
+      text-align: center;
+      padding: 12px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+    .message { /* Error */
+      color: #721c24;
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+    .info { /* Success */
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #555;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+      transition: border-color 0.2s;
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+    .button-group {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+    input[type="submit"], input[type="reset"] {
+      flex-grow: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    input[type="submit"]:hover, input[type="reset"]:hover {
+      opacity: 0.9;
+    }
+    input[type="submit"]:active, input[type="reset"]:active {
+      transform: scale(0.98);
+    }
+    input[type="submit"] {
+      background-color: var(--success-color);
+    }
+    input[type="reset"] {
+      background-color: var(--secondary-color);
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="message" th:if="${result}" th:text="${result}"></div>
+    <div class="info" th:if="${info}" th:text="${info}"></div>
+    <h3>Create Your Account</h3>
+    <form th:action="@{/login/storeCustomerDetails}" method="post" th:object="${customer}">
+      <label for="customerName">Name</label>
+      <input type="text" id="customerName" th:field="*{customerName}" required />
+
+      <label for="customerId">E-Mail</label>
+      <input type="email" id="customerId" th:field="*{customerId}" required />
+
+      <label for="customerPassword">Password</label>
+      <input type="password" id="customerPassword" th:field="*{customerPassword}" required />
+
+      <div class="button-group">
+        <input type="submit" value="Sign Up" />
+        <input type="reset" value="Reset" />
+      </div>
+    </form>
+    <a href="javascript:history.back()" class="back-link">← Back</a>
+  </div>
+</body>
+</html>
