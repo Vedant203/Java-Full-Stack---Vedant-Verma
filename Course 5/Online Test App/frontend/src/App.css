@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --font-family: 'Roboto', sans-serif;
+
+
+  --primary-color: #f472b6;        
+  --primary-hover: #ec4899;
+  --accent-color: #a78bfa;          
+  --highlight-color: #fde047; 
+  --text-primary: #1f2937; 
+  --text-secondary: #6b7280;
+  --bg-main: #fff7ed;  
+  --bg-card: #fff;     
+  --border-color: #f3d5c0;  
+  --success-color: #34d399; 
+  --danger-color: #f87171;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family: var(--font-family);
+  background: linear-gradient(to bottom, #fff7ed, #fde2e4);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.4rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn--primary {
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+  color: #fff;
+}
+.btn--primary:hover {
+  background: linear-gradient(to right, var(--primary-hover), #c4b5fd);
+}
+.btn--secondary {
+  background-color: var(--highlight-color);
+  color: var(--text-primary);
+}
+.btn--secondary:hover {
+  background-color: #facc15;
+}
+.btn--success {
+  background-color: var(--success-color);
+  color: white;
+}
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.app-header {
+  background: linear-gradient(to right, #ffe4e6, #fce7f3);
+  padding: 0 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 65px;
+}
+
+.navbar__brand {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.navbar__links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-left: 2rem;
+  transition: color 0.2s ease;
+}
+.navbar__links a:hover {
+  color: var(--primary-color);
+}
+.quiz-list h1 {
+  font-size: 2.75rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.quiz-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.quiz-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.08);
+}
+.quiz-card h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+.quiz-card p {
+  color: var(--text-secondary);
+  margin: 0 0 1.5rem 0;
+}
+.quiz-page .quiz-header {
+  text-align: center;
+  color: var(--accent-color);
+}
+.quiz-page .progress-bar {
+  background-color: var(--accent-color);
+}
+.quiz-page .question-text {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 2.5rem 0;
+  text-align: center;
+}
+.quiz-page .options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.quiz-page .option-btn {
+  padding: 1.1rem;
+  border: 2px solid var(--border-color);
+  background-color: var(--bg-card);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+.quiz-page .option-btn.selected {
+  border-color: var(--primary-color);
+  background-color: #fff0f5;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+.quiz-page .quiz-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Results */
+.result-page .progress-circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 2rem auto;
+  background: radial-gradient(closest-side, white 85%, transparent 0 99.9%, white 0),
+              conic-gradient(var(--success-color) calc(var(--p) * 1%), #fcd34d 0);
+  animation: progress-animation 1.5s ease-out;
+}
+
+.result-page .progress-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+@property --p {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+@keyframes progress-animation {
+  from { --p: 0 }
+}
+
+/* Review */
+.review-page .answer-line {
+  padding: 1rem;
+  border-left: 5px solid;
+  margin-bottom: 0.75rem;
+  border-radius: 0.5rem;
+}
+.review-page .answer-line--correct {
+  border-color: var(--success-color);
+  background-color: #dcfce7;
+}
+.review-page .answer-line--incorrect {
+  border-color: var(--danger-color);
+  background-color: #fee2e2;
+}
+.review-page .correct-answer-text {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.review-page .review-card--presubmit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+}
+
+.review-page .review-card--presubmit p {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.review-page .review-card__actions {
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
